@@ -113,6 +113,15 @@ int main() {
             // отправляем события на обработку sfml
             ImGui::SFML::ProcessEvent(event);
 
+            // если событие - это клик мышью
+            if ((event.type == sf::Event::MouseButtonPressed) && (!ImGui::GetIO().WantCaptureMouse)) {
+                // если левая кнопка мыши
+                if (event.mouseButton.button == sf::Mouse::Button::Left)
+                    points.emplace_back(sf::Vector2i(event.mouseButton.x, event.mouseButton.y), SET_1);
+                else
+                    points.emplace_back(sf::Vector2i(event.mouseButton.x, event.mouseButton.y), SET_2);
+            }
+
             // если событие - это закрытие окна
             if (event.type == sf::Event::Closed) {
                 // закрываем окно
