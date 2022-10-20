@@ -80,7 +80,30 @@ void ShowBackgroundSetting() {
     // конец рисование окна
 }
 
+// помощь
+void ShowHelp() {
+    if (!ImGui::CollapsingHeader("Help"))
+        return;
 
+    // первый заголовок
+    ImGui::Text("ABOUT THIS DEMO:");
+    // первый элемент списка
+    ImGui::BulletText("Author Syrtsov Stepan 10-1");
+    // второй элемент списка
+    ImGui::BulletText("Powered by SFML+ImGui");
+    // разделитель
+    ImGui::Separator();
+
+    // второй заголовок
+    ImGui::Text("TASK:");
+    // первый элемент списка(многострочный)
+    ImGui::BulletText("Two sets of points are given\n"
+        "in an integer two-dimensional space.\n"
+        "It is required to build intersections and\n"
+        "the difference between these sets.");
+    // разделитель
+    ImGui::Separator();
+}
 
 // рисование задачи на невидимом окне во всё окно приложения
 void RenderTask() {
@@ -367,6 +390,7 @@ int main() {
         ShowRandomize();
         ShowFiles();
         ShowSolve();
+        ShowHelp();
 
         // конец рисования окна
         ImGui::End();
