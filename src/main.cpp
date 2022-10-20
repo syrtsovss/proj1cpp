@@ -138,7 +138,39 @@ void ShowAddElem() {
 
 }
 
+// добавить заданное кол-во случайных точек
+void randomize(int cnt) {
+    for (int i = 0; i < cnt; i++) {
+        points.emplace_back(Point::randomPoint());
+    }
+}
 
+// панель добавления случайных точек
+void ShowRandomize() {
+    // если не раскрыта панель `Randomize`
+    if (!ImGui::CollapsingHeader("Randomize"))
+        // заканчиваем выполнение
+        return;
+
+    // первый элемент в строке
+    ImGui::PushID(0);
+
+    // Инструмент выбора кол-ва
+    if (ImGui::DragInt("Count", lastRandoCntBuf, 0.1, 0, 100)) {
+
+    }
+    // восстанавливаем буффер id
+    ImGui::PopID();
+    // следующий элемент будет на той же строчке
+    ImGui::SameLine();
+    // второй элемент
+    ImGui::PushID(1);
+    // создаём кнопку добавления
+    if (ImGui::Button("Add"))
+        // по клику добавляем заданное число случайных точек
+        randomize(lastRandoCntBuf[0]);
+    ImGui::PopID();
+}
 
 // главный метод
 int main() {
@@ -200,6 +232,7 @@ int main() {
 
         // ручное добавление элементов
         ShowAddElem();
+        ShowRandomize();
 
         // конец рисования окна
         ImGui::End();
